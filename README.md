@@ -1,25 +1,30 @@
 # 🏗️ Critical Infrastructure Detection using RF-DETR
 
+Transformer-based RF-DETR model for drone & aerial surveillance detecting critical infrastructure (bridges, power plants, substations, towers).
+
 <div align="center">
 
 <table>
   <tr>
     <td width="50%">
-      <img src="https://github.com/user-attachments/assets/f2774356-3e9f-4079-af99-945f2cdccb0a" alt="Detection Demo 1"/>
+      <img src="https://github.com/user-attachments/assets/f2774356-3e9f-4079-af99-945f2cdccb0a" alt="Detection Example 1"/>
     </td>
     <td width="50%">
-      <img src="https://github.com/user-attachments/assets/b080e1eb-a57c-46cc-bc8b-00a93e4fa179" alt="Detection Demo 2"/>
+      <img src="https://github.com/user-attachments/assets/b080e1eb-a57c-46cc-bc8b-00a93e4fa179" alt="Detection Example 2"/>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <em>Real-time detection from drone footage</em>
+      <em>Large-scale infrastructure detection from drone footage</em>
     </td>
     <td align="center">
-      <em>Multi-class infrastructure identification</em>
+      <em>Simultaneous multi-class detection in dense environments</em>
     </td>
   </tr>
 </table>
+
+</div>
+
 
 ### 🎯 Detect and localize 19 types of critical infrastructure in aerial imagery
 *Using state-of-the-art RF-DETR (Transformer-based object detection)*
