@@ -34,6 +34,7 @@ Transformer-based RF-DETR model for drone & aerial surveillance detecting critic
 [![RF-DETR](https://img.shields.io/badge/Model-RF--DETR-orange.svg)]()
 [![Roboflow](https://img.shields.io/badge/Roboflow-Dataset-purple.svg)](https://roboflow.com/)
 [![Label Studio](https://img.shields.io/badge/Label%20Studio-Annotation-ff6b6b.svg)](https://labelstud.io/)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/167xgsFcpFqzVfAbT88IFdUYeM_X0h1um)
 [![Batch Processing](https://img.shields.io/badge/Batch-Inference-blue.svg)]()
 [![mAP@50](https://img.shields.io/badge/mAP@50-80%25-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
