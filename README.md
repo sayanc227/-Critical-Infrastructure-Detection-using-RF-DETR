@@ -1,10 +1,41 @@
 # 🏗️ Critical Infrastructure Detection using RF-DETR
 
-> Detect and localize 19 types of critical infrastructure in aerial imagery using state-of-the-art Transformer-based object detection.
+<div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+<table>
+  <tr>
+    <td width="50%">
+      <img src="https://github.com/user-attachments/assets/f2774356-3e9f-4079-af99-945f2cdccb0a" alt="Detection Demo 1"/>
+    </td>
+    <td width="50%">
+      <img src="https://github.com/user-attachments/assets/b080e1eb-a57c-46cc-bc8b-00a93e4fa179" alt="Detection Demo 2"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <em>Real-time detection from drone footage</em>
+    </td>
+    <td align="center">
+      <em>Multi-class infrastructure identification</em>
+    </td>
+  </tr>
+</table>
+
+### 🎯 Detect and localize 19 types of critical infrastructure in aerial imagery
+*Using state-of-the-art RF-DETR (Transformer-based object detection)*
+
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
+[![RF-DETR](https://img.shields.io/badge/Model-RF--DETR-orange.svg)]()
+[![Roboflow](https://img.shields.io/badge/Roboflow-Dataset-purple.svg)](https://roboflow.com/)
+[![Label Studio](https://img.shields.io/badge/Label%20Studio-Annotation-ff6b6b.svg)](https://labelstud.io/)
+[![Batch Processing](https://img.shields.io/badge/Batch-Inference-blue.svg)]()
+[![mAP@50](https://img.shields.io/badge/mAP@50-80%25-brightgreen.svg)]()
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+[🚀 Quick Start](#quick-start) • [📊 Results](#results) • [📖 Documentation](#documentation) • [💼 Portfolio](PORTFOLIO.md)
+
+</div>
 
 ---
 
