@@ -33,7 +33,7 @@
 [![mAP@50](https://img.shields.io/badge/mAP@50-80%25-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[🚀 Quick Start](#quick-start) • [📊 Results](#results) • [📖 Documentation](#documentation) • [💼 Portfolio](PORTFOLIO.md)
+[🚀 Quick Start](#quick-start) • [📊 Results](#results)
 
 </div>
 
@@ -157,17 +157,16 @@ Performance metrics on validation dataset:
 ## 📁 Project Structure
 
 ```
-RF-DETR-Infrastructure-Detection/
-├── src/
-│   ├── train.py              # Training script
-│   ├── predict.py            # Inference script
-│   ├── evaluate.py           # Evaluation metrics
-│   └── models/               # Model architectures
-├── data/                     # Dataset directory (COCO format)
-├── configs/                  # Configuration files
-├── notebooks/                # Jupyter notebooks
-├── requirements.txt          # Python dependencies
-└── README.md
+Critical-Infrastructure-Detection-using-RF-DETR/
+├── assets/              # Visual results & UI assets
+├── src/                 # Training, inference, evaluation code
+├── notebooks/           # Colab / Jupyter notebooks
+├── requirements.txt     # Python dependencies
+├── README.md            # Project documentation
+├── LICENSE              # License
+└── .gitignore           # Git ignore rules
+
+
 ```
 
 ---
@@ -212,9 +211,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-**Your Name** - [your.email@example.com](mailto:your.email@example.com)
+**Sayan C** - [13sayanc@gmail.com](mailto:your.email@example.com)
 
-Project Link: [https://github.com/YOUR_USERNAME/RF-DETR-Infrastructure-Detection](https://github.com/YOUR_USERNAME/RF-DETR-Infrastructure-Detection)
+Project Link: [https://github.com/YOUR_USERNAME/RF-DETR-Infrastructure-Detection](https://github.com/sayanc227/Critical-Infrastructure-Detection-using-RF-DETR)
 
 ---
 
