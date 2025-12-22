@@ -145,18 +145,32 @@ python src/predict.py \
 
 ## 📊 Results
 
-Performance metrics on validation dataset:
+## RF-DETR Validation Performance Metrics
 
-| Class | Precision | Recall | mAP@50 |
-|-------|-----------|--------|--------|
-| Dam | 0.85 | 0.82 | 0.84 |
-| Bridge | 0.79 | 0.76 | 0.78 |
-| Airport Runway | 0.88 | 0.85 | 0.87 |
-| Nuclear Reactor | 0.91 | 0.89 | 0.90 |
-| Solar Power Plant | 0.83 | 0.80 | 0.82 |
-| **Overall (19 classes)** | **0.81** | **0.78** | **0.80** |
+### 📊 Metrics Overview
+- **Precision**: The accuracy of positive predictions.  
+- **Recall**: The ability to find all positive instances.  
+- **$mAP_{50}$**: Mean Average Precision at an Intersection over Union (IoU) threshold of 0.50.  
+- **$mAP_{50:95}$**: Average mAP across IoU thresholds from 0.50 to 0.95 (COCO standard).  
 
-*Note: Replace with your actual evaluation results*
+This table summarizes the performance of your model across all 19 infrastructure classes on the validation set.
+
+| Class                           | Precision | Recall | mAP@50 | mAP@50:95 |
+|---------------------------------|-----------|--------|--------|-----------|
+| **All Classes (Avg)**           | **0.747** | **0.630** | **0.761** | **0.506** |
+| Water Tower                     | 1.000     | 0.630  | 1.000  | 0.897     |
+| Electrical Substation           | 1.000     | 0.630  | 1.000  | 0.545     |
+| Oil Refinery                    | 1.000     | 0.630  | 0.996  | 0.869     |
+| Airport Runway                  | 1.000     | 0.630  | 0.847  | 0.387     |
+| Wind Turbine                    | 1.000     | 0.630  | 0.904  | 0.635     |
+| Transmission Tower              | 0.977     | 0.630  | 0.895  | 0.696     |
+| Satellite Dish / Ground Station | 0.966     | 0.630  | 0.945  | 0.802     |
+| Bridge                          | 0.944     | 0.630  | 0.909  | 0.616     |
+| Mobile Tower                    | 0.938     | 0.630  | 0.828  | 0.563     |
+| Energy Storage Infrastructure   | 0.887     | 0.630  | 0.854  | 0.633     |
+| Nuclear Reactor                 | 0.854     | 0.630  | 0.753  | 0.508     |
+| Seaport                         | 0.842     | 0.630  | 0.825  | 0.537     |
+| Thermal Power Plant             | 0.818     | 0.630  | 0.767  | 0.432     |            
 
 ---
 
