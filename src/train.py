@@ -1,6 +1,5 @@
 import argparse
 from rfdetr import RFDETRBase
-;eer
 
 
 def main(args):
