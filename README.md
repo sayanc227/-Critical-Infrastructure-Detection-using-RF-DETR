@@ -100,61 +100,100 @@ Mobile_Harbour_Cranes
 
 ## 🚀 Quick Start
 
-### Installation
+### 1. Environment Setup
+
+Clone the repository and install dependencies:
 
 ```bash
-# Clone the repository
-https://github.com/sayanc227/Critical-Infrastructure-Detection-using-RF-DETR.git
-cd RF-DETR-Infrastructure-Detection
-
-# Install dependencies
+git clone https://github.com/sayanc227/Critical-Infrastructure-Detection-using-RF-DETR.git
+cd Critical-Infrastructure-Detection-using-RF-DETR
 pip install -r requirements.txt
 ```
 
-### Basic Usage
+> **Note:** A CUDA-enabled GPU is strongly recommended. These scripts are compatible with Google Colab and local GPU machines.
 
-**Train the model:**
-```bash
-python src/train.py \
-    --dataset_dir ./data/cid_dataset \
-    --output_dir ./output \
-    --epochs 50 \
-    --batch_size 4
+---
+
+### 2. Dataset Structure
+
+The dataset must follow COCO format and be organized as:
+
 ```
-
-**Run inference on images:**
-```bash
-python src/predict.py \
-    --checkpoint ./output/checkpoint_best_ema.pth \
-    --source ./test_images \
-    --output ./results \
-    --conf 0.35
-```
-
-**Process a single image:**
-```bash
-python src/predict.py \
-    --checkpoint ./output/checkpoint_best_ema.pth \
-    --image ./my_image.jpg \
-    --output ./results \
-    --conf 0.35 \
-    --visualize
+dataset/
+├── train/
+│   ├── images...
+│   └── _annotations.coco.json
+├── valid/
+│   ├── images...
+│   └── _annotations.coco.json
+└── test/
+    ├── images...
+    └── _annotations.coco.json
 ```
 
 ---
 
+### 3. Training the Model
+
+To start training from scratch:
+
+```bash
+python train.py \
+  --dataset_dir path/to/dataset \
+  --output_dir output/ \
+  --epochs 50 \
+  --batch_size 4 \
+  --grad_accum_steps 4 \
+  --lr 1e-4 \
+  --early_stopping
+```
+
+To resume training from a checkpoint:
+
+```bash
+python train.py \
+  --dataset_dir path/to/dataset \
+  --output_dir output/ \
+  --resume output/checkpoint0049.pth \
+  --epochs 65
+```
+
+---
+
+### 4. Evaluating a Trained Model
+
+Evaluate a trained model using a saved checkpoint:
+
+```bash
+python evaluate.py \
+  --dataset_dir path/to/dataset \
+  --checkpoint output/checkpoint_best_total.pth
+```
+
+This will compute COCO-style metrics (mAP, AP@0.5, AP@0.75, recall) and optionally save predictions for further analysis.
+
+---
+
+### 5. Running Inference (Prediction)
+
+Run inference on a single image:
+
+```bash
+python predict.py \
+  --dataset_dir path/to/dataset \
+  --checkpoint output/checkpoint_best_total.pth \
+  --image_path path/to/image.jpg \
+  --threshold 0.3
+```
+
+Output includes detected class IDs, confidence scores, and bounding box coordinates. The confidence threshold can be adjusted based on operational requirements.
+
+
+---
+
+For any deployment, customization, or integration needs, please contact the project author.
+
 ## 📊 Results
-
-## RF-DETR Validation Performance Metrics
-
-### 📊 Metrics Overview
-- **Precision**: The accuracy of positive predictions.  
-- **Recall**: The ability to find all positive instances.  
-- **$mAP_{50}$**: Mean Average Precision at an Intersection over Union (IoU) threshold of 0.50.  
-- **$mAP_{50:95}$**: Average mAP across IoU thresholds from 0.50 to 0.95 (COCO standard).  
-
-This table summarizes the performance of your model across all 19 infrastructure classes on the validation set.
-
 ## RF-DETR Validation Performance Metrics
 
 ### 📊 Metrics Overview
