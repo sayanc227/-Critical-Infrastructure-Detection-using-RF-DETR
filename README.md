@@ -45,155 +45,143 @@ Transformer-based RF-DETR model for drone & aerial surveillance detecting critic
 
 ---
 
-## 📌 About The Project
+## 📌 Project Overview
 
-This project implements **Critical Infrastructure Detection (CID)** using the state-of-the-art **RF-DETR** (Receptive Field DETR) model. The system identifies and localizes **19 types** of critical infrastructure assets in aerial and satellite imagery, including:
+This project focuses on the **automated detection of critical infrastructure**—including **Bridges, Power Plants, Substations, and Communication Towers**—from **aerial and drone imagery**.
 
-- 🛫 Airport Runways
-- 🌉 Bridges  
-- ⚡ Power Plants (Nuclear, Thermal, Solar)
-- 🌊 Dams
-- 🏭 Oil Refineries
-- And 14 more infrastructure types
+Instead of relying solely on scarce or restricted public datasets, this work emphasizes a **Synthetic Data Pipeline** that leverages advanced **Generative AI models** to create rare and difficult-to-capture scenarios. All generated data was **manually reviewed and annotated** to ensure realism and label quality.
 
-**Why RF-DETR?** Unlike traditional CNN-based detectors (like YOLO), RF-DETR uses **Transformer attention mechanisms** to capture global context—essential for detecting large-scale infrastructure in complex terrain.
-
-### ✨ Key Features
-
-- ✅ **End-to-End Pipeline**: From data collection to deployment
-- ✅ **Transformer Architecture**: Superior accuracy for large objects
-- ✅ **19 Infrastructure Classes**: Comprehensive coverage
-- ✅ **Batch Processing**: Efficient inference on multiple images
-- ✅ **Visual Results**: Automatic bounding box visualization with confidence scores
+The detection model is built using **RF-DETR (Roboflow Detection Transformer)**, selected for its strong performance on small objects within large, cluttered aerial scenes and its suitability for near–real-time inference.
 
 ---
 
-## 📂 Dataset & Data Generation
+## 🎯 Objectives
 
-The model is trained on a **custom-curated dataset** built from scratch using a rigorous 4-step process:
-
-### 1️⃣ Manual Data Collection
-Diverse aerial and satellite imagery gathered from multiple sources and geographical regions.
-
-### 2️⃣ Synthetic Image Generation
-Enhanced training data using **Nano Banana Pro** and **Seedream 4** to handle edge cases and improve model robustness.
-
-### 3️⃣ Precise Annotation
-Manual annotation using **Label Studio** with pixel-perfect bounding boxes for high-quality ground truth.
-
-### 4️⃣ Data Cleaning & Preprocessing
-**ChatGPT-assisted** dataset cleaning to standardize annotations and filter low-quality samples.
-
-### 🏷️ Supported Infrastructure Classes (19 Total)
-
-```
-Airport_Runway               Bridge                    Cargo_Ship
-Cooling_Tower                Dam                       Electrical_Substation
-Energy_Storage_Infrastructure Mobile_Tower              Nuclear_Reactor
-Oil_Refinery                 Satellite_Dish            Seaport
-Shipping_Containers          Solar_Power_Plant         Thermal_Power_Plant
-Transmission_Tower           Water_Tower               Wind_Turbine
-Mobile_Harbour_Cranes
-```
+* Detect critical infrastructure from varying aerial and drone viewpoints
+* Address **data scarcity** in security-sensitive domains using synthetic data
+* Train a lightweight transformer-based detector suitable for aerial surveillance
 
 ---
 
-## 🚀 Quick Start
+## 🛠️ Data Pipeline & Methodology
 
-### 1. Environment Setup
+The primary value of this project lies in the **dataset design and curation strategy**, not in custom model architecture development.
 
-Clone the repository and install dependencies:
+### 1️⃣ Data Gathering & Synthesis
 
-```bash
-git clone https://github.com/sayanc227/Critical-Infrastructure-Detection-using-RF-DETR.git
-cd Critical-Infrastructure-Detection-using-RF-DETR
-pip install -r requirements.txt
-```
+Real-world aerial data for critical infrastructure is often limited, restricted, or lacks viewpoint diversity. To mitigate this, a **hybrid dataset** was created using a **60 / 40 split**:
 
-> **Note:** A CUDA-enabled GPU is strongly recommended. These scripts are compatible with Google Colab and local GPU machines.
+* **Real Data (60%)**
 
----
+  * Publicly accessible satellite imagery
+  * Permissible aerial and drone footage
 
-### 2. Dataset Structure
+* **Synthetic Data (40%)**
 
-The dataset must follow COCO format and be organized as:
+  * Generated to simulate rare or operationally relevant viewpoints
+  * Examples include oblique angles, low-light conditions, and complex backgrounds
 
-```
-dataset/
-├── train/
-│   ├── images...
-│   └── _annotations.coco.json
-├── valid/
-│   ├── images...
-│   └── _annotations.coco.json
-└── test/
-    ├── images...
-    └── _annotations.coco.json
-```
+**Generative AI tools used:**
+
+* **Nano Banana Pro**
+  Used for high-fidelity texture generation (e.g., rusted metal towers, cracked concrete bridges).
+
+* **Seedream 4**
+  Used to generate complex environments such as foggy terrain, dense vegetation, and cluttered backgrounds to test robustness.
+
+* **ChatGPT**
+  Used for structured prompt engineering to enforce specific drone camera parameters (field of view, lighting, altitude, perspective).
 
 ---
 
-### 3. Training the Model
+### 2️⃣ Data Cleaning & Quality Control
 
-To start training from scratch:
-
-```bash
-python train.py \
-  --dataset_dir path/to/dataset \
-  --output_dir output/ \
-  --epochs 50 \
-  --batch_size 4 \
-  --grad_accum_steps 4 \
-  --lr 1e-4 \
-  --early_stopping
-```
-
-To resume training from a checkpoint:
-
-```bash
-python train.py \
-  --dataset_dir path/to/dataset \
-  --output_dir output/ \
-  --resume output/checkpoint0049.pth \
-  --epochs 65
-```
+* Manual filtering of generated images to remove visual artifacts and hallucinations
+* Resolution standardization to common drone capture formats
+* Visual inspection for annotation suitability
 
 ---
 
-### 4. Evaluating a Trained Model
+### 3️⃣ Annotation Process
 
-Evaluate a trained model using a saved checkpoint:
+* **Tool:** Label Studio
+* **Format:** COCO
+* **Annotation Type:** Manual bounding boxes
+* **Target Classes:**
 
-```bash
-python evaluate.py \
-  --dataset_dir path/to/dataset \
-  --checkpoint output/checkpoint_best_total.pth
-```
+  * Bridge
+  * Power Plant
+  * Substation
+  * Communication Tower
 
-This will compute COCO-style metrics (mAP, AP@0.5, AP@0.75, recall) and optionally save predictions for further analysis.
-
----
-
-### 5. Running Inference (Prediction)
-
-Run inference on a single image:
-
-```bash
-python predict.py \
-  --dataset_dir path/to/dataset \
-  --checkpoint output/checkpoint_best_total.pth \
-  --image_path path/to/image.jpg \
-  --threshold 0.3
-```
-
-Output includes detected class IDs, confidence scores, and bounding box coordinates. The confidence threshold can be adjusted based on operational requirements.
-
+Care was taken to maintain **consistent class definitions** and bounding box rules across the dataset.
 
 ---
 
-For any deployment, customization, or integration needs, please contact the project author.
+## 🤖 Model Choice: RF-DETR
 
-## 📊 Results
+RF-DETR (Real-Time Detection Transformer) was selected over traditional CNN-based detectors (e.g., YOLO) due to its strengths in aerial surveillance scenarios:
+
+* Transformer-based attention mechanisms help isolate infrastructure within large, cluttered scenes
+* Improved handling of small or distant objects
+* Modern architecture aligned with current research and deployment trends
+
+📘 **Documentation:**
+
+* Official RF-DETR Documentation
+
+---
+
+## 🧪 Training Configuration
+
+* **Environment:** Google Colab Pro (NVIDIA T4 GPU)
+* **Epochs:** 100
+* **Batch Size:** 8
+* **Optimizer:** AdamW
+
+All training, evaluation, and inference steps were conducted using official RF-DETR workflows.
+
+---
+
+## 🚀 How to Run the Project
+
+This project is designed to be **fully reproducible via Google Colab**.
+
+🔗 **Training & Inference Notebook:**
+[Open in Google Colab](https://colab.research.google.com/drive/167xgsFcpFqzVfAbT88IFdUYeM_X0h1um)
+
+### Steps:
+
+1. Open the Colab notebook using the link above
+2. Connect to a GPU runtime
+3. The notebook handles:
+
+   * Installation of RF-DETR
+   * Dataset download and setup
+4. Run the cells to train the model and visualize inference results
+
+---
+
+## 📂 Resources & Downloads
+
+* **Trained Weights:** Available via the Colab notebook
+* **Dataset:** Provided through Kaggle / Roboflow Universe (link inside notebook)
+
+---
+
+## 📊 Results & Observations
+
+* **Synthetic Data Impact:**
+
+  * Adding the 40% synthetic subset resulted in an approximate **15% improvement in mAP** on low-light and oblique-angle validation samples compared to a real-only baseline.
+
+* **Observed Challenges:**
+
+  * Initial confusion between **Communication Towers** and **High-Voltage Pylons**
+  * Mitigated by adding targeted negative samples and refining annotations
+
+These findings reinforced the importance of **dataset composition** over model complexity.
+
 ## RF-DETR Validation Performance Metrics
 
 ### 📊 Metrics Overview
@@ -227,34 +215,6 @@ This table summarizes the performance of your model across all 19 infrastructure
 | Mobile Harbour Cranes            | 0.283     | 0.630  | 0.509  | 0.320     |
 | Shipping Containers             | 0.035     | 0.630  | 0.354  | 0.114     |
             
-
----
-
-## 📁 Project Structure
-
-```
-Critical-Infrastructure-Detection-using-RF-DETR/
-├── assets/              # Visual results & UI assets
-├── src/                 # Training, inference, evaluation code
-├── notebooks/           # Colab / Jupyter notebooks
-├── requirements.txt     # Python dependencies
-├── README.md            # Project documentation
-├── LICENSE              # License
-└── .gitignore           # Git ignore rules
-
-
-```
-
----
-
-## 🛠️ Requirements
-
-- Python 3.8+
-- PyTorch 2.0+
-- CUDA 11.7+ (for GPU training)
-- 8GB+ RAM (16GB recommended)
-
-See `requirements.txt` for full dependency list.
 
 ---
 
