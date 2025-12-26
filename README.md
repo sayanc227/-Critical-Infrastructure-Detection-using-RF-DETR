@@ -135,8 +135,8 @@ RF-DETR (Real-Time Detection Transformer) was selected over traditional CNN-base
 ## 🧪 Training Configuration
 
 * **Environment:** Google Colab Pro (NVIDIA T4 GPU)
-* **Epochs:** 100
-* **Batch Size:** 8
+* **Epochs:** 65
+* **Batch Size:** 4
 * **Optimizer:** AdamW
 
 All training, evaluation, and inference steps were conducted using official RF-DETR workflows.
